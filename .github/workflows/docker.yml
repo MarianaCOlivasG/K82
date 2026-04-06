@@ -1,0 +1,22 @@
+
+name: Construir y subir imagen a DockerHub
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verficar codigo
+        uses: actions/checkout@v4
+      - name: Inicio de sesión en DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Construir imagen en DockerHub
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/node-api:latest .
+      - name: Hacer push de la imagen en DockerHub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/node-api:latest
+
+
