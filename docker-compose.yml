@@ -1,0 +1,10 @@
+
+# docker compose up -d
+services:
+
+  miapi:
+    image: marianaolivas/node-api:latest
+    container_name: miapicontenedor
+    ports: 
+      - 3000:3000
+    
